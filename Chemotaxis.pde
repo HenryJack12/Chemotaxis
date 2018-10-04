@@ -1,11 +1,15 @@
 Balloon[] bob;
 void setup()   
 {     
+  int x;
+  int y;
   size(800, 800);
-  frameRate(60);
-  bob = new Balloon[10];
+  frameRate(45);
+  bob = new Balloon[20];
   for(int i = 0; i < bob.length; i ++) {
-    bob[i] = new Balloon();
+    x = (int) (Math.random() * 200) - 100;
+    y = (int) (Math.random() * 200) - 400;
+    bob[i] = new Balloon(x, y);
   }
 }
 void draw()   
@@ -18,14 +22,16 @@ void draw()
 }  
 class Balloon    
 {     
-  int myX, myY, rand;
-  Balloon() {
-    myX = myY = (int) (Math.random() * 600);
-    rand = (int) (Math.random() * 256);
+  int mySpecialX, mySpecialY, randX, randY, myX, myY;
+  Balloon(int x, int y) {
+    mySpecialX = x;
+    mySpecialY = y;
   }
   void walk(){
-  myX = (mouseX + myX) / 2 + (int) (Math.random() * 150) - 75;
-  myY = (mouseY + myY) / 2 + (int) (Math.random() * 150) - 200;
+    randY = (int) (Math.random() * 6) - 3;
+    randX = (int) (Math.random() * 12) - 6;
+    myX = pmouseX + mySpecialX + randX;
+    myY = pmouseY + mySpecialY + randY;
 }
 void show(){
   ellipse(myX, myY, 40, 60);
